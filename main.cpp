@@ -65,7 +65,7 @@ Step 3: For Iter in range(max_iter):  # loop max_iter times
  * 4. EDIT THE MAXIMUM NUMBER OF ITERATIONS -- TO MAYBE 100 OR MORE
  * */
 
-#include <QCoreApplication>
+
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -712,7 +712,7 @@ void iterationsmax(vector<vector<double>> wolves, vector<vector<double>>best, ve
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+   
     //Defining and initalising variables here sir...
       vector<double> alpha{};
       vector<double> beta{};
@@ -768,5 +768,5 @@ int main(int argc, char *argv[])
 
 
 
-    return a.exec();
+    return 0;
 }
