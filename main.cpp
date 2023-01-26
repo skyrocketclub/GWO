@@ -1,59 +1,42 @@
-
 // GREY_WOLF_OPTIMIZER.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 /*
-Step1: Randomly initialize Grey wolf population of N particles Xi ( i=1, 2, �, n)
-
-
+Step1: Randomly initialize Grey wolf population of N particles Xi ( i=1, 2, ?, n)
 Step2: Calculate the fitness value of each individuals
            sort grey wolf population based on fitness values
            alpha_wolf = wolf with least fitness value
            beta_wolf  = wolf with second least fitness value
            gamma_wolf = wolf with third least fitness value
 ********************************************************************************************************
-
 Step 3: For Iter in range(max_iter):  # loop max_iter times
-
             calculate the value of a
                 a = 2*(1 - Iter/max_iter)
-
             For i in range(N):  # for each wolf
-
                a. Compute the value of A1, A2, A3 and C1, C2, C3
                      A1 = a*(2*r1 -1), A2 = a*(2*r2 -1), A3 = a*(2*r3 -1)
                      C1 = 2*r1, C2 = 2*r2, C3 = 2*r3
-
                b. Computer X1, X2, X3
                        X1 = alpha_wolf.position -
                              A1*abs(C1*alpha_wolf_position - ith_wolf.position)
-
                        X2 = beta_wolf.position -
                              A2*abs(C2*beta_wolf_position - ith_wolf.position)
-
                        X3 = gamma_wolf.position -
                              A3*abs(C3*gamma_wolf_position - ith_wolf.position)
-
                c. Compute new solution and it's fitness
                        Xnew = (X1 + X2 + X3) / 3
                        fnew = fitness( Xnew)
-
                d. Update the ith_wolf greedily
                      if( fnew < ith_wolf.fitness)
-
                          ith_wolf.position = Xnew
                          ith_wolf.fitness = fnew
              End-for
-
              # compute new alpha, beta and gamma
                    sort grey wolf population based on fitness values
                    alpha_wolf = wolf with least fitness value
                    beta_wolf  = wolf with second least fitness value
                    gamma_wolf = wolf with third least fitness value
          End -for
-
-
-
 */
 
 /*
@@ -101,7 +84,7 @@ double functions(vector<double> wolf)
     //    double val = 0.000228-(0.000002*L) - (0.000043*S) - (0.00000001*D);
     // double val = 0.3345 - 0.000386 * L + 0.0574 * S - 0.000013 * D + 0.00000 * L * L - 0.02100 * S * S + 0.000000 * D * D - 0.000928 * L * S - 0.000000 * L * D - 0.000000 * S * D;
 
-    val = 1.719 - 0.023 * DF - 0.024754 * GV - 0.00253 * FR;
+    val = -6.306 + (22.25 * DF) - (0.02516 * GV) + (0.2039 * FR) - (13.828 * DF * DF) + (0.000010 * GV * GV) - (0.01271 * FR * FR) + (0.02254 * DF * GV) - (0.142 * DF * FR) + (0.000250 * GV * FR);
     return val;
 }
 
@@ -110,14 +93,14 @@ vector<vector<double>> randomInit(vector<vector<double>> bounds)
     // recall that the formular is x = L + r(U - L)
     // the vector bounds has the lower and upper boundaries...
     vector<vector<double>> init;
-    vector<double> randoms{}; // Vector to store the random numbers for the first wolf
+    vector<double> randoms; // Vector to store the random numbers for the first wolf
 
     double x;
     srand((unsigned)time(NULL)); // Seeding the random numbers so that they vary always
 
     for (int k{0}; k < population; k++)
     {
-        vector<double> init_part{};
+        vector<double> init_part;
         double random{};
 
         for (int i{0}; i < bounds.size(); i++)
@@ -300,9 +283,7 @@ void iterations(vector<vector<double>> wolves, vector<vector<double>> best, vect
         /*
         calculate the value of a
                 a = 2*(1 - Iter/max_iter)
-
             For i in range(N):  # for each wolf
-
                a. Compute the value of A1, A2, A3 and C1, C2, C3
                      A1 = a*(2*r1 -1), A2 = a*(2*r2 -1), A3 = a*(2*r3 -1)
                      C1 = 2*r1, C2 = 2*r2, C3 = 2*r3
